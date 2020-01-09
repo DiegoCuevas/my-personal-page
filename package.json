@@ -1,0 +1,13 @@
+{
+  "name": "my-personal-page",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DiegoCuevas/my-personal-page.git",
+  "author": "Diego Cuevas <diegocuevas579@gmail.com>",
+  "license": "MIT",
+  "scripts": {"build": "contentz build"},
+  "dependencies": {
+    "@contentz/build": "^2.5.1",
+    "contentz": "^3.14.1"
+  }
+}
