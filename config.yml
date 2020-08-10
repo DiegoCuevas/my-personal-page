@@ -1,10 +1,12 @@
 ---
-title: Diego Cuevas
-description: Codeable's graduate. I'm Ruby on Rails and React developer. 
-language: en
-repository: https://github.com/diegocuevas/my-personal-page/
-email: diegocuevas579@gmail.com
-social:
-  twitter: diegogcuevas
-  github: diegocuevas
-  linkedin: diegogcuevas
+  title: Diego Cuevas
+  description: Software Engineer
+  language: en
+  repository: https://github.com/DiegoCuevas/personal-site/
+  email: diegocuevas579@gmail.com
+  social:
+    twitter: diegogcuevas
+    github: DiegoCuevas
+    linkedin: diegogcuevas
+  navigation:
+  incremental: false

@@ -5,12 +5,19 @@
   "repository": "git@github.com:DiegoCuevas/my-personal-page.git",
   "author": "Diego Cuevas <diegocuevas579@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "@contentz/build": "2.5.7",
+    "@contentz/write": "3.13.2",
+    "@emotion/core": "^10.0.28",
+    "contentz": "3.14.1",
+    "react": "^16.13.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "serve": "11.3.2",
+    "watch": "1.0.2"
+  },
   "scripts": {
     "build": "contentz build"
-  },
-  "dependencies": {
-    "@contentz/build": "^2.5.1",
-    "@contentz/init": "^3.14.2",
-    "contentz": "^3.14.1"
   }
 }
