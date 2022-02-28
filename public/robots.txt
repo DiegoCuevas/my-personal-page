@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: https:/diegocuevas.dev/404.html
+Disallow: https:/diegocuevas.dev/load-sw.js
+Disallow: https:/diegocuevas.dev/load-analytics.js
+Sitemap: https:/diegocuevas.dev/sitemap.xml

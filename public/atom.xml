@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Diego Cuevas - Articles</title>
+    <link href="https://diegocuevas.dev" rel="self"/>
+    <link href="https://diegocuevas.dev"/>
+    <updated>1646087066861</updated>
+    <id>https://diegocuevas.dev</id>
+    <author>
+      <name>Diego Cuevas</name>
+      <email>diegocuevas579@gmail.com</email>
+    </author>
+      <entry>
+        <id>Como crear un Bot de discord usando Ruby</id>
+        <title>Como crear un Bot de discord usando Ruby</title>
+        <link href="https://diegocuevas.dev/articles/discord_bot/"/>
+        <updated>2022-02-28T18:00:00.000Z</updated>
+        <content type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>En este articulo explicaré como hacer un bot que mande memes a tu servidor de discord usando solo ruby 🤠</p>
+            <a href="https://diegocuevas.dev/articles/discord_bot/">Read Article</a>
+          </div>
+        </content>
+        <author>
+          <name>Diego Cuevas</name>
+          <email>diegocuevas579@gmail.com</email>
+        </author>
+      </entry>
+      <entry>
+        <id>Bootcamp y la Universidad</id>
+        <title>Bootcamp y la Universidad</title>
+        <link href="https://diegocuevas.dev/articles/first_article/"/>
+        <updated>2020-08-10T00:00:00.000Z</updated>
+        <content type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">
+            <p>Una pequeña historia de como entré al mundo de desarrollo</p>
+            <a href="https://diegocuevas.dev/articles/first_article/">Read Article</a>
+          </div>
+        </content>
+        <author>
+          <name>Diego Cuevas</name>
+          <email>diegocuevas579@gmail.com</email>
+        </author>
+      </entry>
+  </feed>
