@@ -1,0 +1,88 @@
+---
+title: Como crear un Bot de discord usando Ruby
+published: true
+description: "En este articulo explicaré como hacer un bot que mande memes a tu servidor de discord usando solo ruby 🤠"
+date: 2022-02-28T18:00:00.000Z
+lang: es
+---
+
+Primero debemos crear el bot en la [pagina de discord](https://discord.com/developers/applications), 
+para obtener el token del bot debemos ir a la parte settings/Bot creas el bot y guardas el token que sale abajo del username del bot.
+
+**Requerimientos:**
+Ya con el token podemos empezar a codear, usaremos e instalaremos las siguentes herramientas:
+
+> Una gema de Ruby para la API de Discord(https://www.rubydoc.info/gems/discordrb)
+```sh
+$ gem install discordrb o bundle add discordrb
+``` 
+
+> Necesitarás esto para que funcione la función de voz de discordrb
+```sh
+$ brew install libsodium 
+``` 
+
+> Otra biblioteca popular para audio/video requerida por discordrb para soporte de voz
+```sh
+$ brew install ffmpeg 
+``` 
+
+> Creamos un archivo `main.rb` donde agregamos primero los `require` de las herramientas que usaremos:
+
+```rb
+require "discordrb"
+require "mechanize"
+require "json"
+```
+
+## Creando el bot
+
+> Luego con el token que nos dieron podremos inicializar para crear los comandos de nuestro bot eso seria algo asi: 
+```rb
+bot = Discordrb::Bot.new token: 'XXXXXXXXXXXXXX'
+```
+
+> Entonces hacemos el `bot.message(with_text: ‘some key word’)` para que cada vez que reconozca el key word o palabra clave entre a la funcion.
+<br/> 
+En mi caso es 'meme'
+
+```rb
+bot.message(with_text: 'meme') do |event|
+```
+
+> Para traer la imagen usaremos mechanize que se utiliza para automatizar la interacción con los sitios web.
+```ruby
+agent = Mechanize.new
+```
+
+> buscamos una url que nos de images random de memes por ejemplo yo usé esta url.
+```rb 
+link = 'https://meme-api.herokuapp.com/gimme'
+```
+
+> Hacemos un get al endpoint y parseamos la data a Json para obtener la url de la imagen.
+```
+response = JSON.parse(agent.get(link).body.to_s)
+```
+
+> Después yo hice esto, para obtener el nombre y su tipo como (“.gif”,”.png”).
+```rb
+name = response['url'].split('/').last
+```
+
+> Entonces ya que tenemos la url de la imagen le hacemos un get a la url de la imagen y la guardamos con el nombre que obtenemos arriba.
+```rb
+agent.get(response["url"]).save name
+```
+
+> Una vez guardada usamos el metodo “.send_file” para mandar la imagen
+```rb
+event.send_file(File.open(name), caption: response["title"])
+```
+
+> Despues mandar la imagen, dormimos nuestra funcion por dos segundos y borramos la imagen de nuesta carpeta
+```rb
+sleep(2)
+event File.delete(name)
+```
+
