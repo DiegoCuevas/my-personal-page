@@ -80,7 +80,8 @@ agent.get(response["url"]).save name
 event.send_file(File.open(name), caption: response["title"])
 ```
 
-> Despues mandar la imagen, dormimos nuestra funcion por dos segundos y borramos la imagen de nuesta carpeta
+> Despues mandar la imagen, le hacemos un sleep a nuestra funcion por dos segundos (que hace que se detenga la funcion por el tiempo dicho) 
+y borramos la imagen de nuesta carpeta
 ```rb
 sleep(2)
 event File.delete(name)
