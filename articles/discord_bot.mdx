@@ -6,18 +6,32 @@ date: 2022-02-28T18:00:00.000Z
 lang: es
 ---
 
-Primero debemos crear el bot en la [pagina de discord](https://discord.com/developers/applications), 
+Primero debemos crear el bot en la [pagina de discord](https://discord.com/developers/applications).
+
+![discord](../../img/apps_discord.png)
+<br/>
+
 para obtener el token del bot debemos ir a la parte settings/Bot creas el bot y guardas el token que sale abajo del username del bot.
 
+![bot](../../img/bot.png)
+<br/>
+
+Después debemos agregar nuestro bot a nuestro servidor de discord, para ello debemos ir a la parte OAuth2 url generator seleccionar scope Bot y entrar a la url generada.
+
+![url](../../img/generate_url.png)
+
+Seleccionar el servidor que queremos y listo! ahora solo debemos hacer las funciones de nuestro bot.
+
+------------------------------
 **Requerimientos:**
 Ya con el token podemos empezar a codear, usaremos e instalaremos las siguentes herramientas:
 
-> Una gema de Ruby para la API de Discord(https://www.rubydoc.info/gems/discordrb)
+>  Una gema de Ruby para interactuar con la API de Discord (https://www.rubydoc.info/gems/discordrb)
 ```sh
 $ gem install discordrb 
 ``` 
 
-> Necesitarás esto para que funcione la función de voz de discordrb
+> Necesitarás esto para que funcione la función de voz de discordrb, a pesar de que no lo usemos la gema discordrb requiere de esto.
 ```sh
 $ brew install libsodium 
 ``` 
@@ -88,3 +102,22 @@ sleep(2)
 event File.delete(name)
 ```
 
+
+> algo asi nos quedaria la funcion:
+```rb
+bot.message(with_text: 'meme') do |event|
+  agent = Mechanize.new
+  link = 'https://meme-api.herokuapp.com/gimme'
+  response = JSON.parse(agent.get(link).body.to_s)
+  name = response['url'].split('/').last
+  agent.get(response["url"]).save name
+  event.send_file(File.open(name), caption: response["title"])
+  sleep(2)
+  File.delete(name)
+end
+```
+
+
+finalmente mandamos un mensaje meme en nuestro servidor de discord.
+
+![meme](../../img/meme.gif)
