@@ -26,22 +26,22 @@ Seleccionar el servidor que queremos y listo! ahora solo debemos hacer las funci
 **Requerimientos:**
 Ya con el token podemos empezar a codear, usaremos e instalaremos las siguentes herramientas:
 
->  Una gema de Ruby para interactuar con la API de Discord (https://www.rubydoc.info/gems/discordrb)
+- Una gema de Ruby para interactuar con la API de Discord (https://www.rubydoc.info/gems/discordrb)
 ```sh
 $ gem install discordrb 
 ``` 
 
-> Necesitarás esto para que funcione la función de voz de discordrb, a pesar de que no lo usemos la gema discordrb requiere de esto.
+> Necesitarás esto para que funcióne la función de voz de discordrb, a pesar de que no lo usemos la gema discordrb requiere de esto.
 ```sh
 $ brew install libsodium 
 ``` 
 
-> Otra biblioteca popular para audio/video requerida por discordrb para soporte de voz
+- Otra biblioteca popular para audio/video requerida por discordrb para soporte de voz
 ```sh
 $ brew install ffmpeg 
 ``` 
 
-> Creamos un archivo `main.rb` donde agregamos primero los `require` de las herramientas que usaremos:
+Creamos un archivo `main.rb` donde agregamos primero los `require` de las herramientas que usaremos:
 
 ```rb
 require "discordrb"
@@ -51,59 +51,59 @@ require "json"
 
 ## Creando el bot
 
-> Luego con el token que nos dieron podremos inicializar para crear los comandos de nuestro bot eso seria algo asi: 
+Luego con el token que nos dieron podremos inicializar para crear los comandos de nuestro bot eso sería algo así: 
 ```rb
 bot = Discordrb::Bot.new token: 'XXXXXXXXXXXXXX'
 ```
 
-> Entonces hacemos el `bot.message(with_text: ‘some key word’)` para que cada vez que reconozca el key word o palabra clave entre a la funcion.
-<br/> 
+Entonces hacemos el `bot.message(with_text: ‘some key word’)` para que cada vez que reconozca el key word o palabra clave entre a la función.
+
 En mi caso es 'meme'
 
 ```rb
 bot.message(with_text: 'meme') do |event|
 ```
 
-> Para traer la imagen usaremos mechanize que se utiliza para automatizar la interacción con los sitios web.
+Para traer la imagen usaremos mechanize que se utiliza para automatizar la interacción con los sitios web.
 ```ruby
 agent = Mechanize.new
 ```
 
-> buscamos una url que nos de images random de memes por ejemplo yo usé esta url.
+Buscamos una url que nos de images random de memes por ejemplo yo usé esta url.
 ```rb 
 link = 'https://meme-api.herokuapp.com/gimme'
 ```
 
-> Hacemos un get al endpoint y parseamos la data a Json para obtener la url de la imagen.
+Hacemos un get al endpoint y parseamos la data a Json para obtener la url de la imagen.
 ```
 response = JSON.parse(agent.get(link).body.to_s)
 ```
 
-> Después yo hice esto, para obtener el nombre y su tipo como (“.gif”,”.png”).
+Después yo hice esto, para obtener el nombre y su tipo como (“.gif”,”.png”).
 ```rb
 name = response['url'].split('/').last
 ```
 
-> Entonces ya que tenemos la url de la imagen le hacemos un get a la url de la imagen y la guardamos con el nombre que obtenemos arriba.
+Entonces ya que tenemos la url de la imagen le hacemos un get a la url de la imagen y la guardamos con el nombre que obtenemos arriba.
 ```rb
 agent.get(response["url"]).save name
 ```
 
-> Una vez guardada usamos el metodo “.send_file” para mandar la imagen
+Una vez guardada usamos el metodo “.send_file” para mandar la imagen
 ```rb
 event.send_file(File.open(name), caption: response["title"])
 ```
 
-> Despues mandar la imagen, le hacemos un sleep a nuestra funcion por dos segundos
-(que hace que se detenga la funcion por el tiempo dicho), hacemos el sleep para que no se elimine mientras se esta subiendo la imagen.
-y borramos la imagen de nuesta carpeta
+Despues mandar la imagen, le hacemos un sleep a nuestra función por dos segundos
+(que hace que se detenga la función por el tiempo dicho), hacemos el sleep para que no se elimine mientras se esta subiendo la imagen.
+y borramos la imagen de nuestra carpeta
 ```rb
 sleep(2)
 event File.delete(name)
 ```
 
 
-> algo asi nos quedaria la funcion:
+algo asi nos quedaria la función:
 ```rb
 bot.message(with_text: 'meme') do |event|
   agent = Mechanize.new
